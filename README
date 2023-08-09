@@ -1,4 +1,4 @@
-# Group 27 Minitask 5
+# Autonomous Navigation with ROS
 
 The goal of this project is to enable a robot to autonomously navigate an environment and locate a maximum number of objects of interest within a given time frame. The robot has access to a map of the environment, which includes walls and terrain but does not include the objects of interest or objects to avoid. The robot is equipped with an RGB camera, a depth camera, and a laser scanner, and it uses these sensors to localize itself and update the map with the locations of objects.
 
