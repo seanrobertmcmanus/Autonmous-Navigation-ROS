@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+    <name>minitask5</name>
+    <version>1.0.0</version>
+    <description>Package for minitask 5</description>
+    <maintainer email="ian.knight2@nottingham.ac.uk">Ian Knight</maintainer>
+    <license>MIT</license>
+
+    <buildtool_depend>catkin</buildtool_depend>
+    <depend>rospy</depend>
+    <depend>std_msgs</depend>
+    <depend>geometry_msgs</depend>
+    <build_depend>message_generation</build_depend>
+    <exec_depend>message_runtime</exec_depend>
+</package>

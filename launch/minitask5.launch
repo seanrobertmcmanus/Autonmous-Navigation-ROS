@@ -1,0 +1,70 @@
+<launch>
+  <!-- Arguments -->
+  <arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="map_file" default="$(find minitask5)/maps/train_env.yaml"/>
+  <arg name="open_rviz" default="true"/>
+  <arg name="move_forward_only" default="false"/>
+
+  <!-- Testing stuff remove -->
+  <!-- Turtlebot3 -->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
+    <arg name="model" value="$(arg model)" />
+  </include>
+
+  <!-- Final Stuff Keep -->
+  <!-- Map Server -->
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" >
+    <param name="frame_id" value="map"/>
+  </node>
+
+
+  <!-- Required Nodes -->
+  <!-- Gmapping --> 
+  <!-- <include file="$(find minitask5)/launch/t5_gmapping.launch"/>  -->
+  <!-- SLAM or some other mapping -->
+
+  <!-- AMCL -->
+  <!-- <include file="$(find minitask5)/launch/amcl.launch"/> -->
+
+  <!-- Move base (maybe idk if there's anything else) -->
+  <!-- GMCL -->
+  <include file="$(find minitask5)/launch/gmcl.launch"/>
+
+  <!-- Move base -->
+  <include file="$(find minitask5)/launch/move_base.launch"/>
+  
+
+  <!-- Own scripts -->
+  <!-- Controller Node -->
+
+  <!-- Perception Node -->
+  <node name="Perception" pkg="minitask5" type="PerceptionNode.py" >
+      <!-- Parameters -->
+  </node> 
+  <!-- Map Buiding Node -->
+  <node name="MapServer2" pkg="minitask5" type="MapServerNode.py" output="screen" >
+      <!-- Parameters -->
+  </node>
+  <node name="Controller" pkg="minitask5" type="TurtleCommandNode.py" output="screen" >
+      <!-- Parameters -->
+  </node> 
+  <!-- Path Planning Node -->
+  <!-- <node name="PathPlanning" pkg="minitask5" type="PathPlanningNode.py" output="screen" >  -->
+      <!-- Parameters -->
+  <!-- </node>  -->
+  <!-- GeneralMovement -->
+  <node name="GeneralMovement" pkg="minitask5" type="GeneralMovement.py"  >
+      <!-- Parameters -->
+  </node>
+
+
+
+
+  <!-- Remove Later -->
+   <!-- rviz -->
+  <group if="$(arg open_rviz)"> 
+    <node pkg="rviz" type="rviz" name="rviz" required="true"
+          args="-d $(find minitask5)/rviz/minitask5_navigation.rviz"/>
+  </group>
+
+</launch> 

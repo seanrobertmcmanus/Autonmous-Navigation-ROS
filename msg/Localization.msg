@@ -1,0 +1,3 @@
+bool is_localized
+float64 localization_accuracy
+Location location
